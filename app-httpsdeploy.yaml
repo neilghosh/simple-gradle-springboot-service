@@ -1,0 +1,34 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: app-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: luminateassortment.azurecr.io/app:latest
+        imagePullPolicy: Always
+        ports:
+           - name: http
+             containerPort: 8080
+      imagePullSecrets:
+      - name: lapoc-auth
+
+apiVersion: v1
+kind: Service
+metadata:
+ name: app-backend
+spec:
+ type: ClusterIP
+ selector:
+   app: app
+ ports:
+  - name: http
+    protocol: TCP
+    port: 80
+    targetPort: 8080
