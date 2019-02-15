@@ -18,7 +18,7 @@ spec:
              containerPort: 8080
       imagePullSecrets:
       - name: lapoc-auth
-
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -32,3 +32,24 @@ spec:
     protocol: TCP
     port: 80
     targetPort: 8080
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: app-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  tls:
+  - hosts:
+    - app.centralus.cloudapp.azure.com
+    secretName: app-tls
+  rules:
+  - host: app.centralus.cloudapp.azure.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: app-backend
+          servicePort: 80
