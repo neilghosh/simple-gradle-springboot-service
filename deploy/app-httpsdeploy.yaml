@@ -16,15 +16,13 @@ spec:
         ports:
            - name: http
              containerPort: 8080
-      imagePullSecrets:
-      - name: lapoc-auth
 ---
 apiVersion: v1
 kind: Service
 metadata:
  name: app-backend
 spec:
- type: ClusterIP
+ type: LoadBalancer
  selector:
    app: app
  ports:
