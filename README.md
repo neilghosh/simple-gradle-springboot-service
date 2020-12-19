@@ -19,14 +19,14 @@ pack build --builder gcr.io/buildpacks/builder:v1 simple-gradle-springboot-servi
 Docker
 
 ```
-docker build . -t neilghosh/gradle-spring-boot-app:latest
+docker build . -t neilghosh/gradle-spring-boot-app:latest -f deploy/Dockerfile
 docker push neilghosh/gradle-spring-boot-app
 ```
 
 RUN 
 ```
 ##Local
-./gradlew run 
+./gradlew bootRun 
 ## Using docker
 docker run --rm -p 8080:8080 simple-gradle-springboot-service 
 ```
