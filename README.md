@@ -6,10 +6,31 @@ http://www.neilghosh.com/2019/02/quick-microservice-with-gradle-spring.html
 
 ## Containerize 
 
+[Install Docker](https://store.docker.com/search?type=edition&offering=community)
+
+[Install the pack tool (a CLI for running Buildpacks)](https://buildpacks.io/docs/install-pack/)
+
+Buildpack
+
+```
+pack build --builder gcr.io/buildpacks/builder:v1 simple-gradle-springboot-service
+```
+
+Docker
+
 ```
 docker build . -t neilghosh/gradle-spring-boot-app:latest
 docker push neilghosh/gradle-spring-boot-app
 ```
+
+RUN 
+```
+##Local
+./gradlew run 
+## Using docker
+docker run --rm -p 8080:8080 simple-gradle-springboot-service 
+```
+
 
 ## Deploy
 
