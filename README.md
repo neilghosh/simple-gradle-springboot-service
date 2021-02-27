@@ -50,3 +50,14 @@ Create .pfx file
 ```
 openssl pkcs12 -export -out app-tls.pfx -inkey app-tls.key -in app-tls.crt
 ```
+
+## Profile
+
+Enable JFR and Hit 
+```
+java -XX:+FlightRecorder         -XX:StartFlightRecording=settings=default,filename=myrecording.jfr         -jar build/libs/gradle-spring-boot-project.jar 
+ab -n 1000 -c 5 http://localhost:8080/longmethod
+
+```
+
+

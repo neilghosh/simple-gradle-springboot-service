@@ -27,4 +27,20 @@ public class HelloGradleController {
         return "Hello Gradle!";
     }
 
+    @GetMapping("longmethod")
+    public String longMethod() throws InterruptedException {
+        shortMethod();
+        superLongMethod();
+        shortMethod();
+        return "Long Method Finished!";
+    }
+
+
+    private void shortMethod() throws InterruptedException {
+        Thread.sleep(1000L);
+    }
+
+    private void superLongMethod() throws InterruptedException {
+        Thread.sleep(3000L);
+    }
 }
